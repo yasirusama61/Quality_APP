@@ -61,7 +61,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -75,4 +74,7 @@ jobs:
         with:
           app-name: 'quality-app'
           slot-name: 'Production'
-          
+
+      # Set the webapp-url as output explicitly
+      - name: Set webapp-url output
+        run: echo "webapp-url=${{ steps.deploy-to-webapp.outputs.webapp-url }}" >> $GITHUB_ENV
