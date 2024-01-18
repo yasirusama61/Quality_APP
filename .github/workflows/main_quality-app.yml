@@ -50,7 +50,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -59,14 +59,12 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip -o release.zip -d .
 
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9f0aa05f-939b-479a-9be1-1bbce16e6e89 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9BD81EEF411046AFB48FA33C98EFC564 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_594417176C294889AE42CF009F11FAF8 }}
+          creds: '${{ secrets.AZUREAPPSERVICE_CREDENTIALS }}'
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
