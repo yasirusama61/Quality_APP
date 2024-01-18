@@ -44,7 +44,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: ${{ secrets.AZURE_WEBAPP_NAME }}
     permissions:
       id-token: write # This is required for requesting the JWT
 
@@ -57,20 +57,9 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip -o release.zip -d .
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: '${{ secrets.AZUREAPPSERVICE_CLIENTSECRET }}'
-          tenant-id: '${{ secrets.AZUREAPPSERVICE_TENANTID }}'
-          client-id: '${{ secrets.AZUREAPPSERVICE_CLIENTID }}'
-
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp
         with:
-          app-name: 'quality-app'
-          slot-name: 'Production'
-
-      # Set the webapp-url as output explicitly
-      - name: Set webapp-url output
-        run: echo "webapp-url=${{ steps.deploy-to-webapp.outputs.webapp-url }}" >> $GITHUB_ENV
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          slot-name: ${{ secrets.AZURE_WEBAPP_SLOT_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
