@@ -25,7 +25,7 @@ def get_machine_data():
 # MES API endpoint for sending and receiving data
 MES_API_URL = "https://mes.example.com/api/production_data"
 HEADERS = {
-    'Authorization': 'Bearer YOUR_API_TOKEN',  # Add proper API token
+    'Authorization': 'Bearer OUR_API_TOKEN',  # Add proper API token
     'Content-Type': 'application/json'
 }
 
