@@ -2,7 +2,11 @@
 
 ## Overview
 
-The Quality_APP is a predictive analytics and real-time monitoring tool designed specifically for battery cell manufacturing. This application integrates with a Manufacturing Execution System (MES) to track production data, monitor machine operations, and predict potential defects during the assembly process. The app utilizes machine learning models to analyze key process parameters and provide corrective feedback to reduce defects and improve product quality:
+The **Quality_APP** is designed for real-time monitoring and prediction of high and low-risk battery cells in a production line. By utilizing IPQC (In-Process Quality Control), FQC (Final Quality Control), and OQC (Outgoing Quality Control) data, the system predicts the risk associated with battery cells and provides recommendations for further actions:
+- **High Risk**: Short-term testing recommended.
+- **Low Risk**: Safe for all usage.
+
+The application integrates with a Manufacturing Execution System (MES) to receive production orders and push data for quality analysis, ensuring comprehensive monitoring and control over the battery cell manufacturing process.
 
 ## Key Features
 - Real-time monitoring of machine operational data (e.g., assembly force, pressure, speed) during battery cell manufacturing.
@@ -12,23 +16,22 @@ The Quality_APP is a predictive analytics and real-time monitoring tool designed
 - Dash-based web app for monitoring machine status, production orders, and analysis results.
 
 ## Features
--**Real-time Machine Data Collection**: Collects real-time operational data (temperature, vibration, speed) from production line machines.
--**MES Integration**: Communicates with an MES via REST API for data exchange, including production orders and machine data.
--**Quality Analysis**: Utilizes machine learning models for defect prediction based on machine data.
--**Corrective Feedback to Machines**: Sends commands to machines to adjust parameters (e.g., speed, temperature) based on quality analysis.
--**Web Monitoring Dashboard**: Provides a real-time web dashboard to visualize machine data and production statuses using Plotly and Dash.
+- **Real-time Data Collection**: Collects quality control data (IPQC, FQC, OQC) from various stages of production.
+- **Risk Prediction**: Machine learning models are used to predict high and low-risk battery cells.
+- **Recommendation System**: Provides actionable insights, suggesting testing for high-risk cells and safe usage for low-risk cells.
+- **MES Integration**: Communicates with MES via REST API for data exchange (production orders, quality control results).
+- **Web Dashboard**: Visualizes production data and risk analysis results, facilitating real-time decision-making.
 
 ## Architecture Overview
 
 ### Data Sources:
-
-- achine-level sensors (temperature, vibration, speed).
-- MES API for production orders and data integration.
+- IPQC, FQC, and OQC data.
+- MES API for integrating production orders and reporting quality control data.
 
 ### Core Functionality:
 
 - Real-time data collection from machines.
-- Analysis using machine learning models (e.g., Logistic Regression, XGBoost).
+- Analysis using machine learning models (Logistic Regression, XGBoost).
 - Feedback loop to adjust machine parameters for quality control.
 
 ### Web Interface:
@@ -89,9 +92,9 @@ Make sure the app is properly configured to interact with the actual production 
 
 ### Interacting with the Dashboard
 
--**Machine Monitoring Section**: Displays real-time machine data such as temperature, vibration, speed, and status.
--**Production Orders Section**: Shows active production orders fetched from the MES.
--**Quality Analysis Results**: Provides a real-time prediction of defects based on machine operating conditions and displays corrective actions sent to machines.
+- **Machine Monitoring Section**: Displays real-time machine data such as temperature, vibration, speed, and status.
+- **Production Orders Section**: Shows active production orders fetched from the MES.
+- **Risk Prediction and Recommendation**: Provides real-time predictions of high/low-risk battery cells based on IPQC, FQC, and OQC data, with recommendations on further testing or clearance.
 
 ### Integration Details
 
@@ -104,7 +107,7 @@ You need to replace the placeholder URL `(MES_API_URL)` and API token in the scr
 
 ### Machine Learning Models
 
-The analyze_quality() function simulates a quality control model to predict potential defects based on machine operating parameters.
+The `analyze_quality()` function simulates a quality control model to predict potential defects based on machine operating parameters.
 You can replace this with actual machine learning models, such as Logistic Regression or XGBoost, trained on your historical production data.
 
 ### Feedback to Machines
@@ -117,16 +120,16 @@ In real-world use cases, this would involve sending signals to the machine's PLC
 - View real-time machine data and production orders from the MES in the Dash web app.
 - Analyze machine data for defects using machine learning models, and see the corrective feedback sent to machines.
 
-### Sample Output
+### Expected Output
 
 ### Machine Status:
 
--**Machine ID**: CNC_01
--**Temperature**: 85.5°C
--**Vibration**: 0.87 m/s²
--**Speed**: 1200 RPM
--**Status**: Operating
--**Production Orders**:
+- **Machine ID**: CNC_01
+- **Temperature**: 85.5°C
+- **Vibration**: 0.87 m/s²
+- **Speed**: 1200 RPM
+- **Status**: Operating
+- **Production Orders**:
         - Order 12345: Battery Pack A - 500 units
         - Order 12346: Battery Pack B - 1000 units
 
@@ -137,7 +140,7 @@ In real-world use cases, this would involve sending signals to the machine's PLC
 
 ### Future Enhancements
 
--**Advanced Machine Learning Models**: Integrate models like Random Forest, Neural Networks, or LSTMs for more robust defect prediction.
--**Data Persistence**: Store machine data and quality analysis results in a database (e.g., PostgreSQL, MongoDB) for further reporting and analytics.
--**Real Machine Data Integration**: Replace the simulated machine data with actual production line data from PLC controllers, IoT devices, or OPC servers.
--**Full MES Integration**: Improve communication with the MES to handle more complex tasks such as job scheduling, downtime tracking, and machine status alerts.
+- **Advanced Machine Learning Models**: Integrate models like Random Forest, Neural Networks, or LSTMs for more robust defect prediction.
+- **Data Persistence**: Store machine data and quality analysis results in a database (e.g., PostgreSQL, MongoDB) for further reporting and analytics.
+- **Real Machine Data Integration**: Replace the simulated machine data with actual production line data from PLC controllers, IoT devices, or OPC servers.
+- **Full MES Integration**: Improve communication with the MES to handle more complex tasks such as job scheduling, downtime tracking, and machine status alerts.
