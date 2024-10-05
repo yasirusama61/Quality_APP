@@ -148,7 +148,7 @@ Based on the results of the quality analysis, corrective feedback is sent to mac
 ### Defect Analysis:
 
 - **Defect Predicted**: Yes
-- **Corrective Action Sent**: Reduce Speed
+- **Corrective Action Sent**: Reduce temperature in CAS_01 to 40°C and adjust current in FORM_01 to 3.2 A.
 
 ### Future Enhancements
 
