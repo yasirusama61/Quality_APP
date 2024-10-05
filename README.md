@@ -113,7 +113,7 @@ You can replace this with actual machine learning models, such as Logistic Regre
 ### Feedback to Machines
 Based on the results of the quality analysis, corrective feedback is sent to machines via the `send_correction_to_machine()` function.In real-world use cases, this would involve sending signals to the machine's PLC to adjust operating parameters (e.g., speed, temperature).
 
-### Example Usage
+### Usage
 
 - Run the script in a local environment or deploy it on a server.
 - View real-time machine data and production orders from the MES in the Dash web app.
@@ -123,14 +123,27 @@ Based on the results of the quality analysis, corrective feedback is sent to mac
 
 ### Machine Status:
 
-- **Machine ID**: CNC_01
-- **Temperature**: 85.5°C
-- **Vibration**: 0.87 m/s²
-- **Speed**: 1200 RPM
-- **Status**: Operating
+- **Machine ID**: CAS_01 (Cell Assembly Station)
+  - **Temperature**: 45°C
+  - **Vibration**: 0.12 m/s²
+  - **Speed**: 1000 RPM
+  - **Status**: Operating
+
+- **Machine ID**: FORM_01 (Formation Chamber)
+  - **Temperature**: 38°C
+  - **Current**: 3.5 A
+  - **Voltage**: 4.2 V
+  - **Status**: Charging
+
+- **Machine ID**: EOL_01 (End-Of-Line Tester)
+  - **Temperature**: 40°C
+  - **Voltage**: 3.9 V
+  - **SOC**: 98%
+  - **Status**: Testing
+
 - **Production Orders**:
-        - Order 12345: Battery Pack A - 500 units
-        - Order 12346: Battery Pack B - 1000 units
+  - Order 98765: High Capacity Cell - 2000 units
+  - Order 98766: Standard Capacity Cell - 1500 units
 
 ### Defect Analysis:
 
