@@ -153,7 +153,7 @@ Based on the results of the quality analysis, corrective feedback is sent to mac
 ## Visualizations
 
 ### Battery Cell Risk Prediction Over Time
-![Battery Cell Risk Prediction Over Time](plots/battery_cell_risk_over_time.png)
+![Battery Cell Risk Prediction Over Time](plots/battery_cell_risk_pie_chart.png)
 
 ### Recommendations for Battery Cell Testing
 ![Recommendations for Battery Cell Testing](plots/battery_cell_testing_recommendations.png)
