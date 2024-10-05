@@ -99,7 +99,7 @@ Make sure the app is properly configured to interact with the actual production 
 ### Integration Details
 
 ### Machine Data Fetching
-Machine data is simulated in the get_machine_data() function. In a real-world environment, replace this with actual data from your PLCs, IoT devices, or sensors.
+Machine data is simulated in the `get_machine_data()` function. In a real-world environment, replace this with actual data from your PLCs, IoT devices, or sensors.
 The data includes critical operational parameters such as temperature, speed, vibration, and machine status.
 MES API Communication
 The app sends real-time machine data to the MES using `post_machine_data_to_mes()` and retrieves production orders using fetch_production_orders().
