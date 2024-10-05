@@ -53,21 +53,21 @@ The application integrates with a Manufacturing Execution System (MES) to receiv
 
 ### Clone the repository:
 
--`git clone https://github.com/yasirusama61/Quality_APP_MES_Integration.git`
--`cd Quality_APP_MES_Integration`
+- `git clone https://github.com/yasirusama61/Quality_APP_MES_Integration.git`
+- `cd Quality_APP_MES_Integration`
 
 ### Install the required dependencies:
--`pip install -r requirements.txt`
+- `pip install -r requirements.txt`
 
-### Sample requirements.txt:
+### requirements.txt:
 
--`dash==2.1.0`
--`dash-bootstrap-components==0.13.0`
--`requests==2.26.0`
--`pandas==1.3.3`
--`plotly==5.4.0`
--`scikit-learn==0.24.2`
--`xgboost==1.4.2`
+- `dash==2.1.0`
+- `dash-bootstrap-components==0.13.0`
+- `requests==2.26.0`
+- `pandas==1.3.3`
+- `plotly==5.4.0`
+- `scikit-learn==0.24.2`
+- `xgboost==1.4.2`
 
 ## Usage
 
@@ -77,7 +77,7 @@ Ensure you have your MES API token set up in the environment variables or update
 
 Run the following command to start the app:
 
--`python app.py`
+- `python app.py`
 
 Access the Dash app in your browser at: `http://127.0.0.1:8050`.
 
@@ -86,7 +86,7 @@ Access the Dash app in your browser at: `http://127.0.0.1:8050`.
 Use Gunicorn or a similar WSGI server for production deployment.
 
 
--`gunicorn -b 0.0.0.0:8050 app:app`
+- `gunicorn -b 0.0.0.0:8050 app:app`
 
 Make sure the app is properly configured to interact with the actual production line machines and the MES API.
 
