@@ -111,8 +111,7 @@ The `analyze_quality()` function simulates a quality control model to predict po
 You can replace this with actual machine learning models, such as Logistic Regression or XGBoost, trained on your historical production data.
 
 ### Feedback to Machines
-Based on the results of the quality analysis, corrective feedback is sent to machines via the send_correction_to_machine() function.
-In real-world use cases, this would involve sending signals to the machine's PLC to adjust operating parameters (e.g., speed, temperature).
+Based on the results of the quality analysis, corrective feedback is sent to machines via the `send_correction_to_machine()` function.In real-world use cases, this would involve sending signals to the machine's PLC to adjust operating parameters (e.g., speed, temperature).
 
 ### Example Usage
 
