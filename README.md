@@ -150,15 +150,14 @@ Based on the results of the quality analysis, corrective feedback is sent to mac
 - **Defect Predicted**: Yes
 - **Corrective Action Sent**: Reduce temperature in CAS_01 to 40°C and adjust current in FORM_01 to 3.2 A.
 
-### Corrective Actions Over Time
-This plot shows the corrective actions (e.g., reducing speed, adjusting temperature) applied over time during the manufacturing process.
+## Visualizations
 
-![Corrective Actions Over Time](plots/corrective_actions_over_time.png)
+### Battery Cell Risk Prediction Over Time
+![Battery Cell Risk Prediction Over Time](plots/battery_cell_risk_over_time.png)
 
-### Success of Corrective Actions
-This bar chart shows the success or failure rate of the corrective actions taken based on the defect analysis results.
+### Recommendations for Battery Cell Testing
+![Recommendations for Battery Cell Testing](plots/battery_cell_testing_recommendations.png)
 
-![Success of Corrective Actions](plots/success_of_corrective_actions.png)
 
 
 ### Future Enhancements
