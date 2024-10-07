@@ -59,16 +59,6 @@ The application integrates with a Manufacturing Execution System (MES) to receiv
 ### Install the required dependencies:
 - `pip install -r requirements.txt`
 
-### requirements.txt:
-
-- `dash==2.1.0`
-- `dash-bootstrap-components==0.13.0`
-- `requests==2.26.0`
-- `pandas==1.3.3`
-- `plotly==5.4.0`
-- `scikit-learn==0.24.2`
-- `xgboost==1.4.2`
-
 ## Usage
 
 ### Running the App Locally
