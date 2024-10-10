@@ -1,6 +1,13 @@
 # Quality_APP with MES Integration
 
 ## Overview
+The **Quality_APP** aims to achieve the following objectives:
+
+1. **Quality Digitalization**: Transform traditional quality control processes by digitalizing quality data, enabling real-time monitoring and predictive analytics.
+2. **Online Quality Engineering**: Implement an online system for quality control during production, integrating machine learning models to predict potential defects and recommend corrective actions.
+3. **Reliability Prediction During Development Phase**: Utilize predictive analytics to assess the reliability of battery cells during the early stages of development, allowing for proactive adjustments to improve product quality.
+4. **Optimization of Incoming Materials and On-Site Sampling Inspection**: Enhance the efficiency of material inspections and sampling processes by leveraging predictive models to identify high-risk batches and adjust inspection protocols accordingly.
+5. **Delivery Risk Assessment During Mass Production Stage**: Assess the risk associated with delivering battery cells during the mass production phase by evaluating quality metrics and production data, ensuring high-quality output and timely delivery.
 
 The **Quality_APP** is designed for real-time monitoring and prediction of high and low-risk battery cells in a production line. By utilizing IPQC (In-Process Quality Control), FQC (Final Quality Control), and OQC (Outgoing Quality Control) data, the system predicts the risk associated with battery cells and provides recommendations for further actions:
 - **High Risk**: Short-term testing recommended.
@@ -139,6 +146,55 @@ Based on the results of the quality analysis, corrective feedback is sent to mac
 
 - **Defect Predicted**: Yes
 - **Corrective Action Sent**: Reduce temperature in CAS_01 to 40°C and adjust current in FORM_01 to 3.2 A.
+
+## Quality Inspection Insights Using MIL-STD-1916
+
+### 1. Understanding AQL and LTPD
+
+The Acceptable Quality Level (AQL) and Lot Tolerance Percent Defective (LTPD) are key metrics in quality control:
+- **AQL**: Represents the threshold of acceptable quality for a "good batch." It is commonly set at a producer risk of 5% (α = 5%), meaning there is a 5% chance of rejecting an acceptable batch.
+- **LTPD**: Indicates the threshold for an unacceptable "bad batch." It is often set at a consumer risk of 10% (β = 10%), meaning there is a 10% chance of accepting a defective batch.
+
+The following figure shows the AQL and LTPD on the OC curve:
+
+![AQL and LTPD](plots/aql_ltpd_curve.png)
+
+### 2. Operating Characteristic (OC) Curves for Sampling Plans
+
+The OC curve represents the probability of accepting a batch based on its quality level. Different sampling plans impact the shape of the OC curve. The variables include:
+- **Batch size (N)**: The total number of items in a batch.
+- **Sample size (n)**: The number of items inspected from the batch.
+- **Acceptance number (Ac)**: The maximum allowable number of defective items in the sample.
+
+The plot below illustrates OC curves for various batch sizes and sample sizes:
+
+![OC Curves for Sampling Plans](plots/oc_curves_sampling.png)
+
+### Insights:
+- **Impact of Batch Size (N)**: Larger batch sizes generally result in a steeper OC curve, meaning a clearer distinction between good and bad quality batches.
+- **Impact of Sample Size (n)**: Increasing the sample size reduces the probability of accepting a defective batch but requires more inspection effort.
+- **Acceptance Criteria (Ac)**: The acceptance criteria affect the likelihood of accepting batches with varying quality levels, balancing consumer and producer risks.
+
+### 3. Sampling Code Comparison
+
+The following table summarizes the sampling codes based on batch size and acceptance criteria:
+
+| Batch Size (N) | Sample Size (n) | Acceptance Number (Ac) |
+|----------------|-----------------|------------------------|
+| 100            | 20              | 0                      |
+| 200            | 20              | 0                      |
+| 500            | 50              | 0                      |
+| 1000           | 100             | 0                      |
+
+### Application in Quality Control
+
+The MIL-STD-1916 standard is used to optimize the inspection of incoming materials and on-site sampling by:
+- Determining appropriate sample sizes and acceptance criteria to balance inspection effort and quality assurance.
+- Reducing the risk of accepting defective batches (consumer risk) while minimizing the likelihood of rejecting acceptable batches (producer risk).
+
+These insights and figures align with the project's goal of improving quality control through systematic sampling and inspection procedures.
+
+
 
 ## Visualizations
 
