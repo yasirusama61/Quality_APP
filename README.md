@@ -219,7 +219,7 @@ The process involves evaluating risks associated with delivering battery cells, 
 
 These data sources together form a robust framework for assessing delivery risks, allowing for proactive measures to be taken to ensure quality and minimize defects during mass production.
 
-## Visualizations
+## Results
 
 ### Battery Cell Risk Prediction Over Time
 ![Battery Cell Risk Distribution](plots/battery_cell_risk_pie_chart.png)
@@ -230,6 +230,16 @@ These data sources together form a robust framework for assessing delivery risks
 ### Recommendations for Battery Cell Testing
 ![Recommendations for Battery Cell Testing](plots/battery_cell_testing_recommendations.png)
 
+### 1. Recommendations for Battery Cell Testing
+The scatter plot indicates battery cells categorized as either "Short Term Test Recommended" or "Safe for All Usage." Cells in the "Short Term Test Recommended" category (shown in red) may require additional testing to ensure quality, while those in the "Safe for All Usage" category (shown in green) have passed the standard quality checks. This approach helps prioritize testing resources and optimize inspection efforts, especially when dealing with a large number of battery cells.
+
+### 2. Battery Cell Risk Distribution
+The pie chart illustrates the proportion of high-risk versus low-risk battery cells. Approximately 30% of the cells fall under the high-risk category, while the remaining 70% are considered low-risk. This distribution can guide quality control actions by focusing additional inspections on high-risk cells to reduce potential failures and improve the overall quality of the battery pack.
+
+### 3. Battery Cell Risk Score Distribution
+The bar chart displays the risk score distribution for 100 battery cells. The blue dashed line indicates the high-risk threshold (75), above which cells are considered high-risk (shown in red bars). Cells below this threshold (shown in green bars) are deemed low-risk. The variability in risk scores highlights the need for dynamic testing strategies to ensure that high-risk cells undergo further inspection, while low-risk cells can be approved for use more quickly.
+
+These visualizations provide a comprehensive approach to quality control by categorizing cells based on risk, allowing targeted testing to improve production efficiency and ensure the reliability of battery cells.
 
 
 ### Future Enhancements
