@@ -194,7 +194,30 @@ The MIL-STD-1916 standard is used to optimize the inspection of incoming materia
 
 These insights and figures align with the project's goal of improving quality control through systematic sampling and inspection procedures.
 
+### Delivery Risk Assessment During Mass Production
 
+The process involves evaluating risks associated with delivering battery cells, modules, or packs during the mass production stage. This assessment relies on comprehensive data collected throughout the production process, along with feedback from various stages of the product lifecycle.
+
+#### Data Sources for Risk Assessment:
+
+1. **Full Process Data for Each Batch (Cells/Modules/Packs):**
+   - Includes data from the design, manufacturing process, materials used, and inspection stages.
+   - Ensures traceability and provides insights into potential quality issues at each step of production.
+
+2. **Failure Data:**
+   - **Pack Side Failure Data:** Failures detected during testing or in the field.
+   - **OEM Failure Data:** Issues identified by the original equipment manufacturers (OEMs).
+
+3. **Customer Feedback and After-Sales Data:**
+   - **Market Customer Complaint Data:** Insights from customer complaints and feedback.
+   - **After-Sales Maintenance Data:** Data related to maintenance activities performed post-sale.
+   - **Vehicle Backend System Big Data:** Information collected from vehicle systems that can provide early warnings or trends regarding battery performance issues.
+
+#### Key Insights:
+- **0km Data Analysis:** Quality control data before the product hits the market, ensuring issues are detected early.
+- **>0km Data Analysis:** Post-market data analysis for ongoing quality monitoring and improvement efforts.
+
+These data sources together form a robust framework for assessing delivery risks, allowing for proactive measures to be taken to ensure quality and minimize defects during mass production.
 
 ## Visualizations
 
