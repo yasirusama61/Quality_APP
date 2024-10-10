@@ -219,6 +219,14 @@ The process involves evaluating risks associated with delivering battery cells, 
 
 These data sources together form a robust framework for assessing delivery risks, allowing for proactive measures to be taken to ensure quality and minimize defects during mass production.
 
+### Automation and Data Handling Efforts
+
+1. **Shopflow System Daily Yield Automation**: The current status involves automating daily yield calculations, which currently take about 40 minutes every day.
+2. **DV2 Battery Cell Data Statistics Automation**: Automating the collection and processing of battery cell data, which currently takes approximately 20 minutes daily.
+3. **SPC Data Automation**: Automating Statistical Process Control (SPC) data tasks, reducing manual data handling, which presently takes about 15 minutes per day.
+4. **Automated Series Comparison of Key Inspection Data**: Efforts are ongoing to automate comparisons of key inspection data, although the work order history database is still being manually established.
+
+
 ## Results
 
 ### Battery Cell Risk Prediction Over Time
