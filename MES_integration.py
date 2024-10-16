@@ -1,138 +1,109 @@
 import requests
 import json
 import time
+import pandas as pd
 from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
-import pandas as pd
-import plotly.graph_objects as go
-import random
+from sklearn.externals import joblib  # For loading pre-trained models
 
-# Simulating real-time data from machines on the production line
-def get_machine_data():
+# MES API endpoint for fetching battery manufacturing data
+MES_API_URL = "https://mes.example.com/api/production_data"  # Replace with actual MES API
+
+# Features used for risk level prediction
+features = [
+    'positive_electrode_viscosity', 'negative_electrode_viscosity', 'electrode_coating_weight',
+    'electrode_thickness', 'electrode_alignment', 'welding_bead_size', 'lug_dimensions', 
+    'moisture_content_after_baking', 'electrolyte_weight', 'formation_energy', 
+    'aging_time', 'pressure', 'ambient_temperature'
+]
+
+# Load pre-trained risk prediction model (assumes model is already trained and saved as a .pkl file)
+model = joblib.load('risk_prediction_model.pkl')
+
+# Function to fetch real-time data from MES
+def fetch_battery_data_from_mes():
     """
-    Simulate fetching real-time data from a machine on the production line.
-    In a real-world scenario, this would involve connecting to PLCs, IoT sensors, or OPC servers.
+    Fetch real-time data for the battery manufacturing process from the MES.
+    In a real-world scenario, this would involve connecting to the MES API or a database.
     """
-    return {
-        'machine_id': 'CNC_01',
-        'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
-        'temperature': random.uniform(50.0, 120.0),  # Simulating temperature
-        'vibration': random.uniform(0.1, 1.5),  # Simulating vibration levels
-        'speed': random.uniform(500, 1500),  # Simulating machine speed in RPM
-        'status': 'operating' if random.random() > 0.1 else 'fault',  # Random machine status
-    }
-
-# MES API endpoint for sending and receiving data
-MES_API_URL = "https://mes.example.com/api/production_data"
-HEADERS = {
-    'Authorization': 'Bearer OUR_API_TOKEN',  # Add proper API token
-    'Content-Type': 'application/json'
-}
-
-# Function to push machine data to MES
-def post_machine_data_to_mes(machine_data):
     try:
-        response = requests.post(MES_API_URL, headers=HEADERS, data=json.dumps(machine_data))
+        response = requests.get(MES_API_URL, headers={'Authorization': 'Bearer YOUR_API_TOKEN'})  # Replace with your actual token
         if response.status_code == 200:
-            print("Machine data successfully sent to MES.")
+            return response.json()  # Assuming the response contains the required features as JSON
         else:
-            print(f"Failed to send machine data to MES: {response.status_code}")
-    except Exception as e:
-        print(f"Error sending machine data to MES: {e}")
-
-# Fetch production orders from MES (could be product type, quantity, machine setup, etc.)
-def fetch_production_orders():
-    try:
-        response = requests.get(MES_API_URL + '/orders', headers=HEADERS)
-        if response.status_code == 200:
-            return response.json()
-        else:
-            print(f"Failed to fetch production orders from MES: {response.status_code}")
+            print(f"Failed to fetch data from MES: {response.status_code}")
             return None
     except Exception as e:
         print(f"Error connecting to MES: {e}")
         return None
 
-# Function to perform quality analysis (simulating Logistic Regression, XGBoost, etc.)
-def analyze_quality(machine_data):
+# Function to predict risk level based on features
+def predict_risk_level(data):
     """
-    Simulate a machine learning model that predicts if a machine will produce defective products
-    based on machine operating parameters (temperature, vibration, speed, etc.).
+    Predict the risk level based on the provided data.
+    :param data: Dictionary containing feature values from MES.
+    :return: Predicted risk level.
     """
-    # Simulate defect probability based on operating parameters
-    defect_probability = 0.05 * machine_data['temperature'] + 0.2 * machine_data['vibration'] + 0.1 * machine_data['speed']
-    
-    # If defect probability exceeds a threshold, mark it as a potential defect
-    return defect_probability > 1000
+    # Extract features from the data
+    input_data = [data[feature] for feature in features]
 
-# Feedback to the machine based on analysis (e.g., adjust speed or temperature)
-def send_correction_to_machine(machine_id, correction):
-    """
-    In a real-world scenario, this function would send signals back to the machine's PLC or controller
-    to adjust parameters like speed or temperature.
-    """
-    print(f"Sending correction to {machine_id}: {correction}")
+    # Convert input data to DataFrame (since model might expect it as a DataFrame)
+    input_df = pd.DataFrame([input_data], columns=features)
 
-# Simulate data collection, analysis, and feedback loop
-def run_production_line_integration():
-    # Get machine data in real-time
-    machine_data = get_machine_data()
+    # Predict risk level using the pre-trained model
+    risk_level = model.predict(input_df)[0]  # Assuming classification model
+    return risk_level
 
-    # Send machine data to MES
-    post_machine_data_to_mes(machine_data)
-
-    # Analyze quality of production based on machine data
-    is_defective = analyze_quality(machine_data)
-
-    if is_defective:
-        # Send corrective feedback to the machine (e.g., slow down speed or reduce temperature)
-        send_correction_to_machine(machine_data['machine_id'], correction="Reduce speed")
-
-    # Fetch production orders from MES (optional)
-    production_orders = fetch_production_orders()
-
-    # Return data for visualization
-    return machine_data, production_orders
-
-# Dash app for monitoring production line and MES integration
+# Dash app for monitoring and risk prediction
 app = Dash(__name__)
 
 app.layout = html.Div([
-    html.H1("Production Line - Machine and MES Monitoring"),
-    dcc.Interval(id='interval-component', interval=2*1000, n_intervals=0),  # Refresh every 2 seconds
-    html.Div(id="machine-status"),
-    html.Div(id="mes-orders"),
+    html.H1("Battery Manufacturing - Real-time Risk Prediction"),
+    dcc.Interval(id='interval-component', interval=5*1000, n_intervals=0),  # Refresh every 5 seconds
+    html.Div(id="battery-data"),
+    html.Div(id="risk-prediction"),
 ])
 
-# Callback to update dashboard with real-time machine data and MES orders
+# Callback to update dashboard with real-time data and risk prediction
 @app.callback(
-    [Output('machine-status', 'children'),
-     Output('mes-orders', 'children')],
+    [Output('battery-data', 'children'),
+     Output('risk-prediction', 'children')],
     [Input('interval-component', 'n_intervals')]
 )
 def update_dashboard(n):
-    # Get real-time machine data and production orders
-    machine_data, production_orders = run_production_line_integration()
+    # Fetch real-time battery manufacturing data from MES
+    battery_data = fetch_battery_data_from_mes()
 
-    # Display machine data
-    machine_status = html.Div([
-        html.H3(f"Machine {machine_data['machine_id']} Status: {machine_data['status']}"),
-        html.P(f"Temperature: {machine_data['temperature']} °C"),
-        html.P(f"Vibration: {machine_data['vibration']} m/s²"),
-        html.P(f"Speed: {machine_data['speed']} RPM"),
-        html.P(f"Timestamp: {machine_data['timestamp']}")
-    ])
+    if battery_data:
+        # Predict risk level
+        risk_level = predict_risk_level(battery_data)
 
-    # Display production orders from MES
-    if production_orders:
-        mes_orders = html.Div([
-            html.H3("Production Orders from MES"),
-            html.Ul([html.Li(f"Order {order['order_id']}: {order['product']} - {order['quantity']} units") for order in production_orders])
+        # Display battery data and risk level on the dashboard
+        battery_info = html.Div([
+            html.H3(f"Battery Data (Machine ID: {battery_data['machine_id']})"),
+            html.P(f"Positive Electrode Viscosity: {battery_data['positive_electrode_viscosity']}"),
+            html.P(f"Negative Electrode Viscosity: {battery_data['negative_electrode_viscosity']}"),
+            html.P(f"Electrode Coating Weight: {battery_data['electrode_coating_weight']} g"),
+            html.P(f"Electrode Thickness: {battery_data['electrode_thickness']} mm"),
+            html.P(f"Welding Bead Size: {battery_data['welding_bead_size']} mm"),
+            html.P(f"Lug Dimensions: {battery_data['lug_dimensions']} mm"),
+            html.P(f"Moisture Content After Baking: {battery_data['moisture_content_after_baking']}%"),
+            html.P(f"Electrolyte Weight: {battery_data['electrolyte_weight']} g"),
+            html.P(f"Formation Energy: {battery_data['formation_energy']} kWh"),
+            html.P(f"Aging Time: {battery_data['aging_time']} hours"),
+            html.P(f"Pressure: {battery_data['pressure']} Pa"),
+            html.P(f"Ambient Temperature: {battery_data['ambient_temperature']} °C"),
+        ])
+
+        risk_info = html.Div([
+            html.H3(f"Predicted Risk Level: {risk_level}"),
+            html.P("High Risk" if risk_level == 1 else "Low Risk")
         ])
     else:
-        mes_orders = html.Div(html.P("No production orders found."))
+        battery_info = html.Div("Failed to fetch battery data.")
+        risk_info = html.Div("Risk level prediction not available.")
 
-    return machine_status, mes_orders
+    return battery_info, risk_info
 
 # Run the app in production mode
 if __name__ == '__main__':
