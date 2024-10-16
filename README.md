@@ -15,6 +15,8 @@ The **Quality_APP** is designed for real-time monitoring and prediction of high 
 
 The application integrates with a Manufacturing Execution System (MES) to receive production orders and push data for quality analysis, ensuring comprehensive monitoring and control over the battery cell manufacturing process.
 
+Below is a snapshot of the webpage of the Quality APP Dashboard, showcasing its interface and key functionalities such as data upload, model execution, real-time quality risk assessment, and report generation.
+
 ![Quality App Dashboard](plots/quality.png)
 
 ## Key Features
