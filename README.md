@@ -258,5 +258,5 @@ These visualizations provide a comprehensive approach to quality control by cate
 
 - **Advanced Machine Learning Models**: Integrate models like Random Forest, Neural Networks, or LSTMs for more robust defect prediction.
 - **Data Persistence**: Store machine data and quality analysis results in a database (e.g., PostgreSQL, MongoDB) for further reporting and analytics.
-- **Real Machine Data Integration**: Replace the simulated machine data with actual production line data from PLC controllers, IoT devices, or OPC servers.
-- **Full MES Integration**: Improve communication with the MES to handle more complex tasks such as job scheduling, downtime tracking, and machine status alerts.
+- **Enhanced Machine Learning**: Continue optimizing the integration of real production line data from the MES system for more accurate predictions and insights.
+- **Full MES Integration**: Expand communication with the MES to handle more complex tasks such as job scheduling, downtime tracking, and machine status alerts.
